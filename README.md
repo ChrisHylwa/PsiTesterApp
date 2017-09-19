@@ -1,4 +1,4 @@
-#Psi-Tester for Android
+# Psi-Tester for Android
 
 ## Project:
 This is a simple, silly app that tests whether or not the user can predict the future or read a computer's memory. The application asks the player to pick one of five cards. It will then also pick one of those five cards. When the user hits "Reveal", they'll be able t

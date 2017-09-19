@@ -46,7 +46,6 @@ export default class HomeScreen extends React.Component {
     this._onChooseWave = this._onChooseWave.bind(this);
     this._onChooseStar = this._onChooseStar.bind(this);
     this._onChooseSquare = this._onChooseSquare.bind(this);
-    this.pickCard = this.pickCard.bind(this);
   }
 
   render() {
@@ -104,7 +103,7 @@ export default class HomeScreen extends React.Component {
           <Button
             title='See your Stats!'
             onPress={() => 
-              navigate('Stats')
+              navigate('Stats', {attempts: this.state.attempts, successes: this.state.successes})
             }
           />
 
@@ -112,6 +111,7 @@ export default class HomeScreen extends React.Component {
 
         <Text> Chosen Card: {this.state.guess} </Text>
         <Text> Attempts: {this.state.attempts} </Text>
+        <Text> Correct: {this.state.successes} </Text>
         <Text> Last Card: {this.state.card} </Text>
       </View>
     );
@@ -148,19 +148,19 @@ export default class HomeScreen extends React.Component {
   }
 
   _onSubmit() {
-    newCard = this.pickCard
+    var cards = ['circle', 'star', 'wave', 'square', 'cross'];
+    newCard = cards[Math.floor(Math.random() * cards.length)];
+
+    var succeed = this.state.successes
+    if (newCard == this.state.guess) {
+      succeed = this.state.successes + 1
+    }
+
     this.setState({
       attempts: this.state.attempts + 1,
+      successes: succeed,
       card: newCard
     });
-  }
-
-  pickCard() {
-    var cards = ['circle', 'star', 'wave', 'square', 'cross'];
-    var rand = cards[Math.floor(Math.random() * cards.length)];
-    
-    Alert.alert('The card was:' + rand);
-    return rand;
   }
 }
 

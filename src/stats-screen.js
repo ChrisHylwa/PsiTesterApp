@@ -4,17 +4,27 @@ import { StackNavigator } from 'react-navigation'
 
 
 export default class StatsScreen extends React.Component {
+
+
+  constructor(props){
+    super(props)
+    this.state = {attempts: 0, successes: 0};
+  }
+
   render() {
+
     return (
       <View style={styles.container}>
         <FlatList
           data={[
-            {key: 'Successes'},
-            {key: 'Attempts'},
-            {key: 'Success Ratio'},
-            {key: 'Rank'}
+            {key: 'Successes', value: this.state.successes},
+            {key: 'Attempts', value: this.state.attempts},
+            {key: 'Success Ratio', value: this.state.successes/this.state.attempts},
+            {key: 'Rank', value: ''}
           ]}
-          renderItem={({item}) => <Text style={styles.item}>{item.key} : </Text>}
+          renderItem={({item}) => 
+            <Text style={styles.item}>{item.key} : {item.value}
+            </Text>}
         />
       </View>
     );
